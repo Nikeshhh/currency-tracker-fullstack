@@ -1,0 +1,10 @@
+FROM node:latest
+
+WORKDIR /app
+
+COPY ./frontend .
+# RUN npm install
+
+CMD ["sh", "entrypoint.sh"]
+# CMD ["ls"]
+# CMD ["npm", "create", "vite@latest", "currencies", "--template", "react"]
