@@ -1,5 +1,5 @@
 from aiohttp import ClientSession
-
+from async_lru import alru_cache
 from src.config import settings
 
 
@@ -16,13 +16,15 @@ class CMCHttpClient:
             }
         )
 
+    @alru_cache
     async def get_currencies_list(self):
         async with self._session.get('/v1/cryptocurrency/listings/latest') as response:
             response_data = await response.json()
             return response_data.get('data')
 
+    @alru_cache
     async def get_currency(self, currency_id: int):
-        async with self._session.get('/v2/cryptocurrency/info',
+        async with self._session.get('/v2/cryptocurrency/quotes/latest',
                         params={'id': currency_id}) as response:
             response_data = await response.json()
             return response_data.get('data').get(str(currency_id))

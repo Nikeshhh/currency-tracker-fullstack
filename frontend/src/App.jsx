@@ -1,35 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import CurrencyCard from './components/CurrencyCard.jsx';
+import Navigation from './components/Navigation.jsx';
+import { createContext, useState } from 'react';
+import { Spin } from 'antd'
+
+
+export const CurrencyContext = createContext(null)
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [currencyData, setCurrencyData] = useState(null)
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <CurrencyContext.Provider value={{ currencyData, setCurrencyData }}>
+    <div className='flex'>
+      <Navigation />
+      {currencyData ? <CurrencyCard currency={currencyData}/> : <Spin className='mx-auto my-auto'></Spin>}
+    </div>
+    </CurrencyContext.Provider>
   )
 }
 
-export default App
+export default App;
