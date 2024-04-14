@@ -8,7 +8,12 @@ Made for study purposes.
 
 Clone repository
 ```
-git clone ...
+git clone https://github.com/Nikeshhh/currency-tracker-fullstack.git
+```
+
+Make an `.env` file in `./backend` folder and add token
+```
+TRACKER_API_KEY=some-token
 ```
 
 Run application with
